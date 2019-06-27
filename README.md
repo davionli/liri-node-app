@@ -133,6 +133,19 @@ Since this is a command line app, you have to run it with the correct command.
     ```
     Please try it yourself.
 
+## Logging
+
+* Your command and result will be logged into the log.txt file.
+
+    ![log](gifs/log.png)
+
+* You can clear the log.txt using
+
+    ```bash
+    node liri.js clearLog
+    ```
+
+
 ## Support
 The app contians the following API:
 

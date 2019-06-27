@@ -13,7 +13,7 @@ var val;
 if (process.argv[3])
     val = process.argv.slice(3).join("+");
 function logOut(text) {
-    fs.appendFile("log.txt", text, function(err) {
+    fs.appendFile("log.txt",text, function(err) {
         if (err) {
             console.log(err);
           }
@@ -175,5 +175,5 @@ function runLiri(operate, val) {
             console.log("Sorry, I cannot understand your command, type 'help' to see the command menu.");
     }
 }
-logOut(process.argv.slice(2).join(" ")+"\n");
+logOut(moment().format() + "\n " + process.argv.slice(2).join(" ")+"\n");
 runLiri(operate, val);
