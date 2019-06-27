@@ -34,12 +34,12 @@ function runConcert(name) {
         var index = 0;
         function logConcert(index) {
             var date = moment(result[index].datetime.substr(0,10),"YYYY.MM.DD").format("MM/DD/YYYY");
-            console.log(`-------------I found the closest concert------------------------------------------------------------------\n`);
+            console.log(`----------I found the closest concert---------------------------------------------------------------------\n`);
             console.log(`Venue Name: ${result[index].venue.name}`);
             console.log(`Venue Location: ${result[index].venue.city}, ${result[index].venue.region}`);
             console.log(`Time: ${date} @ ${result[index].datetime.substr(11,5)}\n`);
-            console.log(`----------------------------------------------------------------------------------------------------------\n`);
-            logOut(`-------------I found the closest concert------------------------------------------------------------------\nVenue Name: ${result[index].venue.name}\nVenue Location: ${result[index].venue.city}, ${result[index].venue.region}\nTime: ${date} @ ${result[index].datetime.substr(11,5)}\n----------------------------------------------------------------------------------------------------------\n`);
+            console.log(`----------------------------------------------------------------------------------------------------------\n\n`);
+            logOut(`--------I found the closest concert-----------------------------------------------------------------------\nVenue Name: ${result[index].venue.name}\nVenue Location: ${result[index].venue.city}, ${result[index].venue.region}\nTime: ${date} @ ${result[index].datetime.substr(11,5)}\n----------------------------------------------------------------------------------------------------------\n\n`);
         }
         function confirmConcert() {
             inquirer.prompt([{
@@ -70,13 +70,13 @@ function runSpotify(name) {
         var index = 0;
         function logSong(index) {
             var result = data.tracks.items[index]; 
-            console.log(`------------------I found the song------------------------------------------------------------------------\n`);
+            console.log(`----------I found the song--------------------------------------------------------------------------------\n`);
             console.log(`Artist: ${result.artists[0].name}`);
             console.log(`Song Name: ${result.name}`);
             console.log(`Album: ${result.album.name}`);
             console.log(`A preview link: ${result.preview_url}\n`);
-            console.log(`----------------------------------------------------------------------------------------------------------\n`);
-            logOut(`------------------I found the song------------------------------------------------------------------------\nArtist: ${result.artists[0].name}\nSong Name: ${result.name}\nAlbum: ${result.album.name}\nA preview link: ${result.preview_url}\n----------------------------------------------------------------------------------------------------------\n`);
+            console.log(`----------------------------------------------------------------------------------------------------------\n\n`);
+            logOut(`----------I found the song--------------------------------------------------------------------------------\nArtist: ${result.artists[0].name}\nSong Name: ${result.name}\nAlbum: ${result.album.name}\nA preview link: ${result.preview_url}\n----------------------------------------------------------------------------------------------------------\n\n`);
         }
         function confirmSong() {
             inquirer.prompt([{
@@ -103,7 +103,7 @@ function runMovie(name) {
     axios.get(`http://www.omdbapi.com/?t=${name}&y=&plot=short&apikey=trilogy`)
     .then(function(response) {
 
-        console.log(`------------------I found the movie-----------------------------------------------------------------------\n`);
+        console.log(`----------I found the movie-------------------------------------------------------------------------------\n`);
         console.log(`Movie Name: ${response.data.Title}`);
         console.log(`Year: ${response.data.Year}`);
         console.log(`IMDB Rating: ${response.data.Ratings[0].Value}`);
@@ -112,8 +112,8 @@ function runMovie(name) {
         console.log(`Language: ${response.data.Language}`);
         console.log(`Actors: ${response.data.Actors}`);
         console.log(`Plot: ${response.data.Plot}\n`);
-        console.log(`----------------------------------------------------------------------------------------------------------\n`);
-        logOut(`------------------I found the movie-----------------------------------------------------------------------\nMovie Name: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nActors: ${response.data.Actors}\nPlot: ${response.data.Plot}\n----------------------------------------------------------------------------------------------------------\n`);
+        console.log(`----------------------------------------------------------------------------------------------------------\n\n`);
+        logOut(`----------I found the movie-------------------------------------------------------------------------------\nMovie Name: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nActors: ${response.data.Actors}\nPlot: ${response.data.Plot}\n----------------------------------------------------------------------------------------------------------\n\n`);
     }
 )};
 function runWeather(name) {
@@ -122,7 +122,7 @@ function runWeather(name) {
           console.log(err);
         }
         var result = response[0].current;
-        console.log(`------------------I found the weather---------------------------------------------------------------------\n`);
+        console.log(`----------I found the weather-----------------------------------------------------------------------------\n`);
         console.log(`Location: ${response[0].location.name}`);
         console.log(`Date: ${moment(result.date,"YYYY.MM.DD").format("MM/DD/YYYY")}`)
         console.log(`Temperature: ${result.temperature} F`);
@@ -130,8 +130,8 @@ function runWeather(name) {
         console.log(`Humidity: ${result.humidity}`);
         console.log(`Skytext: ${result.skytext}`);
         console.log(`Windspeed: ${result.windspeed}\n`);
-        console.log(`----------------------------------------------------------------------------------------------------------\n`);
-        logOut(`------------------I found the weather---------------------------------------------------------------------\nLocation: ${response[0].location.name}\nTemperature: ${result.temperature} F\nTemperature feels like: ${result.feelslike} F\nHumidity: ${result.humidity}\nSkytext: ${result.skytext}\nWindspeed: ${result.windspeed}\n----------------------------------------------------------------------------------------------------------\n`);
+        console.log(`----------------------------------------------------------------------------------------------------------\n\n`);
+        logOut(`----------I found the weather-----------------------------------------------------------------------------\nLocation: ${response[0].location.name}\nTemperature: ${result.temperature} F\nTemperature feels like: ${result.feelslike} F\nHumidity: ${result.humidity}\nSkytext: ${result.skytext}\nWindspeed: ${result.windspeed}\n----------------------------------------------------------------------------------------------------------\n\n`);
       });
 
 }
@@ -144,6 +144,17 @@ function runSomething() {
         var dataArr = data.split(",");
         runLiri(dataArr[0], dataArr[1]);
     });
+}
+function runHelp() {
+    console.log("----------HELP!-------------------------------------------------------------------------------------------\n");
+    console.log("concert-this <Artist/Band>   ---------------------Search concerts");
+    console.log("spotify-this-song <Title>   ----------------------Search songs");
+    console.log("movie-this <Title>   -----------------------------Search movies");
+    console.log("weather-there <Place>   --------------------------Search weather");
+    console.log("do-what-it-says   --------------------------------secret command");
+    console.log("clear-log   --------------------------------------clear log file\n");
+    console.log("----------------------------------------------------------------------------------------------------------\n\n");
+    logOut("----------HELP!-------------------------------------------------------------------------------------------\n\nconcert-this <Artist/Band>   ---------------------Search concerts\nspotify-this-song <Title>   ----------------------Search songs\nmovie-this <Title>   -----------------------------Search movies\nweather-there <Place>   --------------------------Search weather\ndo-what-it-says   --------------------------------secret command\nclear-log   --------------------------------------clear log file\n\n----------------------------------------------------------------------------------------------------------\n\n")
 }
 function runLiri(operate, val) {
     switch (operate) {
@@ -167,6 +178,9 @@ function runLiri(operate, val) {
             break;
         case "weather-there":
             runWeather(val);
+            break;
+        case "help":
+            runHelp();
             break;
         case "clear-log":
             claerLog();

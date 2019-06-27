@@ -1,8 +1,36 @@
-2019-06-27T03:00:09-07:00
+2019-06-27T10:57:01-07:00
  clear-log
-2019-06-27T03:00:47-07:00
+2019-06-27T10:57:40-07:00
+ concert-this Maron 5
+--------I found the closest concert-----------------------------------------------------------------------
+Venue Name: Curacao North Sea Jazz Festival
+Venue Location: Willemstad, Curaçao, 
+Time: 08/31/2019 @ 19:00
+----------------------------------------------------------------------------------------------------------
+
+2019-06-27T10:58:20-07:00
+ concert-this lang lang
+--------I found the closest concert-----------------------------------------------------------------------
+Venue Name: Davies Symphony Hall
+Venue Location: San Francisco, CA
+Time: 10/21/2019 @ 20:00
+----------------------------------------------------------------------------------------------------------
+
+--------I found the closest concert-----------------------------------------------------------------------
+Venue Name: Palau de la Música Catalana
+Venue Location: Barcelona, 
+Time: 03/21/2020 @ 20:00
+----------------------------------------------------------------------------------------------------------
+
+--------I found the closest concert-----------------------------------------------------------------------
+Venue Name: Stern Auditorium / Perelman Stage at Carnegie Hall
+Venue Location: New York, NY
+Time: 05/07/2020 @ 20:00
+----------------------------------------------------------------------------------------------------------
+
+2019-06-27T10:58:51-07:00
  movie-this
-------------------I found the movie-----------------------------------------------------------------------
+----------I found the movie-------------------------------------------------------------------------------
 Movie Name: Mr. Nobody
 Year: 2009
 IMDB Rating: 7.8/10
@@ -12,32 +40,24 @@ Language: English, Mohawk
 Actors: Jared Leto, Sarah Polley, Diane Kruger, Linh Dan Pham
 Plot: A boy stands on a station platform as a train is about to leave. Should he go with his mother or stay with his father? Infinite possibilities arise from this decision. As long as he doesn't choose, anything is possible.
 ----------------------------------------------------------------------------------------------------------
-2019-06-27T03:00:56-07:00
+
+2019-06-27T10:59:01-07:00
  spotify-this-song
-------------------I found the song------------------------------------------------------------------------
+----------I found the song--------------------------------------------------------------------------------
 Artist: Ace of Base
 Song Name: The Sign
 Album: The Sign (US Album) [Remastered]
 A preview link: https://p.scdn.co/mp3-preview/4c463359f67dd3546db7294d236dd0ae991882ff?cid=032c71789cda42859722aa6391ff2a54
 ----------------------------------------------------------------------------------------------------------
-------------------I found the song------------------------------------------------------------------------
-Artist: Ace of Base
-Song Name: All That She Wants
-Album: The Sign (US Album) [Remastered]
-A preview link: https://p.scdn.co/mp3-preview/b176774bc04182501c2d5d201afda143b1193f31?cid=032c71789cda42859722aa6391ff2a54
+
+2019-06-27T10:59:24-07:00
+ weather-there seattle
+----------I found the weather-----------------------------------------------------------------------------
+Location: Seattle, WA
+Temperature: 62 F
+Temperature feels like: 62 F
+Humidity: 77
+Skytext: Cloudy
+Windspeed: 6 mph
 ----------------------------------------------------------------------------------------------------------
-------------------I found the song------------------------------------------------------------------------
-Artist: Ace of Base
-Song Name: The Sign
-Album: Greatest Hits
-A preview link: https://p.scdn.co/mp3-preview/5ca0168d6b58e0f993b2b741af90ecc7c9b16893?cid=032c71789cda42859722aa6391ff2a54
-----------------------------------------------------------------------------------------------------------
-2019-06-27T03:01:19-07:00
- concert-this Bruno Mars
--------------I found the closest concert------------------------------------------------------------------
-Venue Name: Monte Carlo Resort and Casino
-Venue Location: Las Vegas, NV
-Time: 09/03/2019 @ 19:00
-----------------------------------------------------------------------------------------------------------
-2019-06-27T03:01:32-07:00
- concert-this Coldplay
+
