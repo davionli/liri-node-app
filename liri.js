@@ -2,6 +2,8 @@ require('dotenv').config();
 var fs = require("fs");
 var axios = require("axios");
 var inquirer = require("inquirer");
+var moment = require("moment");
+var weather = require("weather-js");
 var Spotify = require('node-spotify-api');
 
 var keys = require("./keys.js");
@@ -10,8 +12,20 @@ var operate = process.argv[2];
 var val;
 if (process.argv[3])
     val = process.argv.slice(3).join("+");
-
-
+function logOut(text) {
+    fs.appendFile("log.txt", text, function(err) {
+        if (err) {
+            console.log(err);
+          }
+    });
+}
+function claerLog() {
+    fs.writeFile("log.txt", "", function(err) {
+        if (err) {
+            console.log(err);
+        }
+    });
+}
 function runConcert(name) {
     axios.get(`https://rest.bandsintown.com/artists/${name}/events?app_id=codingbootcamp`)
     .then(function(response) {
@@ -19,12 +33,13 @@ function runConcert(name) {
         var totalConcerts = result.length;
         var index = 0;
         function logConcert(index) {
-            var date = `${result[index].datetime.substr(5,2)}/${result[index].datetime.substr(8,2)}/${result[index].datetime.substr(0,4)}`;
+            var date = moment(result[index].datetime.substr(0,10),"YYYY.MM.DD").format("MM/DD/YYYY");
             console.log(`-------------I found the closest concert------------------------------------------------------------------\n`);
             console.log(`Venue Name: ${result[index].venue.name}`);
             console.log(`Venue Location: ${result[index].venue.city}, ${result[index].venue.region}`);
             console.log(`Time: ${date} @ ${result[index].datetime.substr(11,5)}\n`);
             console.log(`----------------------------------------------------------------------------------------------------------\n`);
+            logOut(`-------------I found the closest concert------------------------------------------------------------------\nVenue Name: ${result[index].venue.name}\nVenue Location: ${result[index].venue.city}, ${result[index].venue.region}\nTime: ${date} @ ${result[index].datetime.substr(11,5)}\n----------------------------------------------------------------------------------------------------------\n`);
         }
         function confirmConcert() {
             inquirer.prompt([{
@@ -43,8 +58,8 @@ function runConcert(name) {
         logConcert(index);
         confirmConcert();
     })
-    .catch(function (error) {
-        console.log(error);
+    .catch(function (err) {
+        console.log(err);
     });
 
 }
@@ -61,6 +76,7 @@ function runSpotify(name) {
             console.log(`Album: ${result.album.name}`);
             console.log(`A preview link: ${result.preview_url}\n`);
             console.log(`----------------------------------------------------------------------------------------------------------\n`);
+            logOut(`------------------I found the song------------------------------------------------------------------------\nArtist: ${result.artists[0].name}\nSong Name: ${result.name}\nAlbum: ${result.album.name}\nA preview link: ${result.preview_url}\n----------------------------------------------------------------------------------------------------------\n`);
         }
         function confirmSong() {
             inquirer.prompt([{
@@ -95,10 +111,30 @@ function runMovie(name) {
         console.log(`Country: ${response.data.Country}`);
         console.log(`Language: ${response.data.Language}`);
         console.log(`Actors: ${response.data.Actors}`);
-        console.log(`Plot: ${response.data.Plot}`);
+        console.log(`Plot: ${response.data.Plot}\n`);
         console.log(`----------------------------------------------------------------------------------------------------------\n`);
+        logOut(`------------------I found the movie-----------------------------------------------------------------------\nMovie Name: ${response.data.Title}\nYear: ${response.data.Year}\nIMDB Rating: ${response.data.Ratings[0].Value}\nRotten Tomatoes Rating: ${response.data.Ratings[1].Value}\nCountry: ${response.data.Country}\nLanguage: ${response.data.Language}\nActors: ${response.data.Actors}\nPlot: ${response.data.Plot}\n----------------------------------------------------------------------------------------------------------\n`);
     }
 )};
+function runWeather(name) {
+    weather.find({ search: name, degreeType: "F" }, function(err, response) {
+        if (err) {
+          console.log(err);
+        }
+        var result = response[0].current;
+        console.log(`------------------I found the weather---------------------------------------------------------------------\n`);
+        console.log(`Location: ${response[0].location.name}`);
+        console.log(`Date: ${moment(result.date,"YYYY.MM.DD").format("MM/DD/YYYY")}`)
+        console.log(`Temperature: ${result.temperature} F`);
+        console.log(`Temperature feels like: ${result.feelslike} F`);
+        console.log(`Humidity: ${result.humidity}`);
+        console.log(`Skytext: ${result.skytext}`);
+        console.log(`Windspeed: ${result.windspeed}\n`);
+        console.log(`----------------------------------------------------------------------------------------------------------\n`);
+        logOut(`------------------I found the weather---------------------------------------------------------------------\nLocation: ${response[0].location.name}\nTemperature: ${result.temperature} F\nTemperature feels like: ${result.feelslike} F\nHumidity: ${result.humidity}\nSkytext: ${result.skytext}\nWindspeed: ${result.windspeed}\n----------------------------------------------------------------------------------------------------------\n`);
+      });
+
+}
 function runSomething() {
     fs.readFile("random.txt", "utf-8", function(err, data) {
         if (err) {
@@ -129,8 +165,15 @@ function runLiri(operate, val) {
         case "do-what-it-says":
             runSomething();
             break;
+        case "weather-there":
+            runWeather(val);
+            break;
+        case "clear-log":
+            claerLog();
+            break;
         default:
             console.log("Sorry, I cannot understand your command, type 'help' to see the command menu.");
     }
 }
+logOut(process.argv.slice(2).join(" ")+"\n");
 runLiri(operate, val);
