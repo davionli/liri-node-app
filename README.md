@@ -142,7 +142,7 @@ Since this is a command line app, you have to run it with the correct command.
 * You can clear the log.txt using
 
     ```bash
-    node liri.js clearLog
+    node liri.js clear-log
     ```
 
 
